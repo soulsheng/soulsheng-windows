@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "paint", "paint\paint.vcxproj", "{48E76CF9-DD26-46D3-A4C1-553095391936}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "windownote", "windownote\windownote.vcxproj", "{4D9BA298-E2C4-4CB8-B870-0BE3E760DEAE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "read", "read\read.vcxproj", "{1D4E75C5-CFA0-4D03-9D60-A3937EE0F8EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48E76CF9-DD26-46D3-A4C1-553095391936}.Debug|Win32.ActiveCfg = Debug|Win32
+		{48E76CF9-DD26-46D3-A4C1-553095391936}.Debug|Win32.Build.0 = Debug|Win32
+		{48E76CF9-DD26-46D3-A4C1-553095391936}.Release|Win32.ActiveCfg = Release|Win32
+		{48E76CF9-DD26-46D3-A4C1-553095391936}.Release|Win32.Build.0 = Release|Win32
+		{4D9BA298-E2C4-4CB8-B870-0BE3E760DEAE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D9BA298-E2C4-4CB8-B870-0BE3E760DEAE}.Debug|Win32.Build.0 = Debug|Win32
+		{4D9BA298-E2C4-4CB8-B870-0BE3E760DEAE}.Release|Win32.ActiveCfg = Release|Win32
+		{4D9BA298-E2C4-4CB8-B870-0BE3E760DEAE}.Release|Win32.Build.0 = Release|Win32
+		{1D4E75C5-CFA0-4D03-9D60-A3937EE0F8EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1D4E75C5-CFA0-4D03-9D60-A3937EE0F8EE}.Debug|Win32.Build.0 = Debug|Win32
+		{1D4E75C5-CFA0-4D03-9D60-A3937EE0F8EE}.Release|Win32.ActiveCfg = Release|Win32
+		{1D4E75C5-CFA0-4D03-9D60-A3937EE0F8EE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

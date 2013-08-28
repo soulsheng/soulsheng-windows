@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MessageBox", "MessageBox\MessageBox.vcxproj", "{E84B3434-9C86-4D7E-A45F-F01EB20E8871}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Notepad", "..\Notepad\Notepad.vcxproj", "{7C99653C-142B-4D7D-AA24-7484472BE4AF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Painting", "..\Painting\Painting.vcxproj", "{9D306EB7-D280-43CC-89E9-D4A9FA2E8C7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E84B3434-9C86-4D7E-A45F-F01EB20E8871}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E84B3434-9C86-4D7E-A45F-F01EB20E8871}.Debug|Win32.Build.0 = Debug|Win32
+		{E84B3434-9C86-4D7E-A45F-F01EB20E8871}.Release|Win32.ActiveCfg = Release|Win32
+		{E84B3434-9C86-4D7E-A45F-F01EB20E8871}.Release|Win32.Build.0 = Release|Win32
+		{7C99653C-142B-4D7D-AA24-7484472BE4AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7C99653C-142B-4D7D-AA24-7484472BE4AF}.Debug|Win32.Build.0 = Debug|Win32
+		{7C99653C-142B-4D7D-AA24-7484472BE4AF}.Release|Win32.ActiveCfg = Release|Win32
+		{7C99653C-142B-4D7D-AA24-7484472BE4AF}.Release|Win32.Build.0 = Release|Win32
+		{9D306EB7-D280-43CC-89E9-D4A9FA2E8C7C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D306EB7-D280-43CC-89E9-D4A9FA2E8C7C}.Debug|Win32.Build.0 = Debug|Win32
+		{9D306EB7-D280-43CC-89E9-D4A9FA2E8C7C}.Release|Win32.ActiveCfg = Release|Win32
+		{9D306EB7-D280-43CC-89E9-D4A9FA2E8C7C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

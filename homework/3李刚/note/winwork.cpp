@@ -19,12 +19,18 @@ TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 char textcontent[1024];                         //存储打开txt文件的 内容 
 int nCount[3];                                  //3个便笺的内容长度计数
 int xPosition[1024],yPosition[1024];            //记录鼠标的坐标
+int xPaintpos[2];
+int yPaintpos[2];
+
 char greeting[1024];                            //存储3个便笺的内容
 char greeting1[1024];
 char greeting2[1024];
 
+
 char welcome[1024];                               //显示提示信息
 int welCount;                                     //提示信息 的长度
+int flag_p;                                       //
+
 
 RECT rect, rectdiy;                         
 int nbCount;                                      //记录便笺的个数
@@ -135,6 +141,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		greeting2[i]=0;
 	}
 
+	flag_p=0;
+
 	nCount[0]=0;
 	nCount[1]=0;
 	nCount[2]=0;
@@ -211,6 +219,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				fclose(stream);
 			}
 			break;
+		case ID_NOTE_NOTEPAD:
+			flag_p=1;
+			break;
+        case ID_PAINT_LINE:
+			flag_p=2;
+			break;
+		case ID_PAINT_RECTANGLE:
+			flag_p=3;
+			break;
+		case ID_PAINT_ELLIPSE:
+			flag_p=4;
+			break;
 		case IDM_EXIT:
 			DestroyWindow(hWnd);
 			break;
@@ -220,61 +240,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 	hdc = BeginPaint(hWnd, &ps);
-		// TODO: Add any drawing code here...
-	welrect.left=0;
-	welrect.right=800;
-	welrect.top=0;
-	welrect.bottom=20;
-	 DrawText(hdc,welcome,welCount,&welrect,0);
-		/*
-		rectdiy.left=200;
-		rectdiy.right=500;
-		rectdiy.top=200;
-		rectdiy.bottom=500;
-		*/
-	/*
-		if (xPosition[nbCount*2-3]<xPosition[2*nbCount-2])
-		{
-			rectdiy.left=xPosition[nbCount*2-3]+5;
-			rectdiy.right=xPosition[2*nbCount-2];
-		}
-		else
-		{
-			rectdiy.left=xPosition[2*nbCount-2]+5;
-			rectdiy.right=xPosition[nbCount*2-3];
-		}
-		if (yPosition[nbCount*2-3]<yPosition[2*nbCount-2])
-		{
-			rectdiy.top=yPosition[nbCount*2-3]+5;
-			rectdiy.bottom=yPosition[2*nbCount-2];
-		}
-		else
-		{
-			rectdiy.top=yPosition[2*nbCount-2]+5;
-			rectdiy.bottom=yPosition[nbCount*2-3];
-		}
-		*/
-		
-		/*
-		for (int i=1;i<nCount-1;i++)
-		{
-			MoveToEx(hdc,xPosition[i-1],yPosition[i-1],0);
-			LineTo(hdc,xPosition[i],yPosition[i]);
-		}
-		*/
 
+	  welrect.left=0;
+	  welrect.right=800;
+	  welrect.top=0;
+	  welrect.bottom=20;
+	  DrawText(hdc,welcome,welCount,&welrect,0);
+
+	switch(flag_p)
+	{
+	case 1:
+		{
+		
 	for(int n=2;n<=4;n++)                                    //绘制便笺框
 		{
-	   MoveToEx(hdc,xPosition[2*n-3],yPosition[2*n-3],0);
-		LineTo(hdc,xPosition[2*n-2],yPosition[2*n-3]);
-		MoveToEx(hdc,xPosition[2*n-2],yPosition[2*n-3],0);
-		LineTo(hdc,xPosition[2*n-2],yPosition[2*n-2]);
-		MoveToEx(hdc,xPosition[2*n-2],yPosition[2*n-2],0);
-		LineTo(hdc,xPosition[2*n-3],yPosition[2*n-2]);
-		MoveToEx(hdc,xPosition[2*n-3],yPosition[2*n-2],0);
-		LineTo(hdc,xPosition[2*n-3],yPosition[2*n-3]);
-
-
+			MoveToEx(hdc,xPosition[2*n-3],yPosition[2*n-3],0);
+			LineTo(hdc,xPosition[2*n-2],yPosition[2*n-3]);
+			MoveToEx(hdc,xPosition[2*n-2],yPosition[2*n-3],0);
+			LineTo(hdc,xPosition[2*n-2],yPosition[2*n-2]);
+			MoveToEx(hdc,xPosition[2*n-2],yPosition[2*n-2],0);
+			LineTo(hdc,xPosition[2*n-3],yPosition[2*n-2]);
+			MoveToEx(hdc,xPosition[2*n-3],yPosition[2*n-2],0);
+			LineTo(hdc,xPosition[2*n-3],yPosition[2*n-3]);
 		if (xPosition[n*2-3]<xPosition[2*n-2])                  //确定 便笺的区域
 		{
 			rectdiy.left=xPosition[n*2-3]+5;
@@ -310,7 +297,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		  }
 
 		}	
-
+		}
+		break;
+	case 2:
+		MoveToEx(hdc,xPaintpos[0],yPaintpos[0],0);
+		LineTo(hdc,xPaintpos[1],yPaintpos[1]);
+		break;
+	case 3:
+		Rectangle(hdc,xPaintpos[0],yPaintpos[0],xPaintpos[1],yPaintpos[1]) ;
+		break;
+	case 4:
+		Ellipse(hdc,xPaintpos[0],yPaintpos[0],xPaintpos[1],yPaintpos[1]) ;
+		break;
+	
+	}
+		// TODO: Add any drawing code here...
+	 
 
 		
 	//	MessageBox(0,g[1],NULL,0);
@@ -350,13 +352,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 				xPosition[2*nbCount-1]=GET_X_LPARAM(lParam);              //获取左键按下时的坐标
 			    yPosition[2*nbCount-1]=GET_Y_LPARAM(lParam);	
-			
+			    xPaintpos[0]=xPosition[2*nbCount-1];
+				yPaintpos[0]=yPosition[2*nbCount-1];
 			break;
 		}
 	case WM_LBUTTONUP :
 		{
 			xPosition[2*nbCount]=GET_X_LPARAM(lParam);                    //获取左键抬起时的坐标
 			yPosition[2*nbCount]=GET_Y_LPARAM(lParam);
+
+			xPaintpos[1]=xPosition[2*nbCount];
+			yPaintpos[1]=yPosition[2*nbCount];
 
 			nbCount++;
 		//	GetClientRect(hWnd,&rect);

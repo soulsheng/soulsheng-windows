@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "windiy", "windiy\windiy.vcxproj", "{1F467880-DECF-40D1-BCB8-344E7DCC73A3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Notes", "..\Notes\Notes\Notes.vcxproj", "{2E4C7E60-AA00-4892-9332-D54D2D34C62A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Noteinput", "Noteinput\Noteinput.vcxproj", "{E02907F9-2D17-4866-B718-B019E55F6C3F}"
 EndProject
 Global
@@ -17,10 +15,6 @@ Global
 		{1F467880-DECF-40D1-BCB8-344E7DCC73A3}.Debug|Win32.Build.0 = Debug|Win32
 		{1F467880-DECF-40D1-BCB8-344E7DCC73A3}.Release|Win32.ActiveCfg = Release|Win32
 		{1F467880-DECF-40D1-BCB8-344E7DCC73A3}.Release|Win32.Build.0 = Release|Win32
-		{2E4C7E60-AA00-4892-9332-D54D2D34C62A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2E4C7E60-AA00-4892-9332-D54D2D34C62A}.Debug|Win32.Build.0 = Debug|Win32
-		{2E4C7E60-AA00-4892-9332-D54D2D34C62A}.Release|Win32.ActiveCfg = Release|Win32
-		{2E4C7E60-AA00-4892-9332-D54D2D34C62A}.Release|Win32.Build.0 = Release|Win32
 		{E02907F9-2D17-4866-B718-B019E55F6C3F}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E02907F9-2D17-4866-B718-B019E55F6C3F}.Debug|Win32.Build.0 = Debug|Win32
 		{E02907F9-2D17-4866-B718-B019E55F6C3F}.Release|Win32.ActiveCfg = Release|Win32

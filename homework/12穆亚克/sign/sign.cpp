@@ -1,28 +1,27 @@
-// chuangtikaifa.cpp : 定义应用程序的入口点。
+// sign.cpp : 定义应用程序的入口点。
 //
 
 #include "stdafx.h"
-#include "chuangtikaifa.h"
+#include "sign.h"
+#include "Windowsx.h "
 #include "Windows.h"
-#include "Windowsx.h"
 #define MAX_LOADSTRING 100
 
 // 全局变量:
 HINSTANCE hInst;								// 当前实例
 TCHAR szTitle[MAX_LOADSTRING];					// 标题栏文本
 TCHAR szWindowClass[MAX_LOADSTRING];			// 主窗口类名
-int x1,y1,x2,y2;
-RECT rect;
-char text[1024];
-int nCount;
-bool drawrect;
 
 // 此代码模块中包含的函数的前向声明:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
-
+int nCount;
+int xPos[1024];
+int yPos[1024];
+int DrawWhich;
+int xLeft,yTop,xRight,yBottom;
 
 
 
@@ -41,7 +40,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	// 初始化全局字符串
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-	LoadString(hInstance, IDC_CHUANGTIKAIFA, szWindowClass, MAX_LOADSTRING);
+	LoadString(hInstance, IDC_SIGN, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
 
 	// 执行应用程序初始化:
@@ -50,7 +49,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CHUANGTIKAIFA));
+	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SIGN));
 
 	// 主消息循环:
 	while (GetMessage(&msg, NULL, 0, 0))
@@ -91,10 +90,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbClsExtra		= 0;
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
-	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CHUANGTIKAIFA));
+	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SIGN));
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_CHUANGTIKAIFA);
+	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_SIGN);
 	wcex.lpszClassName	= szWindowClass;
 	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -113,20 +112,17 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-	x1=0;
-	y1=0;
-	y2=0;
-	x2=0;
+	DrawWhich=0;
 	for(int i=0;i<1024;i++)
 	{
-		text[i]=0;
+		xPos[i]=0;
+		yPos[i]=0;
 	}
-	drawrect=false;
 	nCount=0;
 
 
    HWND hWnd;
-   
+
    hInst = hInstance; // 将实例句柄存储在全局变量中
 
    hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
@@ -180,67 +176,46 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		// TODO: 在此添加任意绘图代码...
-		rect.top=y1+10;
-		rect.left=x1+10;
-		rect.bottom=y2-10;
-		rect.right=x2-10;
-		if(drawrect==true)
+		if(DrawWhich==1)
 		{
-		Rectangle (hdc, x1, y1, x2, y2) ;
-		DrawText(hdc,text,nCount,&rect,DT_CENTER | DT_EDITCONTROL | DT_WORDBREAK);
-		}
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_KEYDOWN:
-		if (wParam == 8 )
-		{			
-			if(nCount > 0)
+			for(int i=1;i<nCount;i++)
 			{
-				text[nCount]=0;
-			    //text[nCount-1]=0;
-			    nCount = nCount-1;
-			    InvalidateRect(hWnd,NULL, false);
+				MoveToEx(hdc,xPos[i-1],yPos[i-1],0);
+				LineTo(hdc,xPos[i],yPos[i]);
+
 			}
-			else
-				break;
+		
 		}
-		break;
-	case WM_LBUTTONDOWN:
-		InvalidateRect(hWnd,NULL, false);
-		drawrect=false;
-		x1=GET_X_LPARAM(lParam);
-		y1=GET_Y_LPARAM(lParam);
-		for (int i=0;i<1024;i++)
-		{
-			text[i]=0;
-		}	
-	
-	nCount=0;
 
-
-		break;
-
-
-
-	case WM_LBUTTONUP:
-		drawrect=true;
-		x2=GET_X_LPARAM(lParam);
-		y2=GET_Y_LPARAM(lParam);
-
-		//DrawWhich=0;
-		break;
-
-
-	case WM_CHAR:
-		
-			text[nCount]=wParam;
-			nCount++;
-			InvalidateRect(hWnd,NULL, false);
-		
+		EndPaint(hWnd, &ps);
 		break;
 
 	case WM_DESTROY:
 		PostQuitMessage(0);
+		break;
+	case WM_MOUSEMOVE:
+		if (DrawWhich==1)
+		{
+		    xPos[nCount] = GET_X_LPARAM(lParam); 
+		    yPos[nCount] = GET_Y_LPARAM(lParam);
+		    nCount++;
+		    InvalidateRect(hWnd,NULL, false);
+		}
+		break;
+	case WM_LBUTTONDOWN:
+		DrawWhich=1;
+		//DrawWhich=0;
+	for(int i=0;i<1024;i++)
+	{
+		xPos[i]=0;
+		yPos[i]=0;
+	}
+	nCount=0;
+
+		break;
+
+	case WM_LBUTTONUP:
+		DrawWhich=0;
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);

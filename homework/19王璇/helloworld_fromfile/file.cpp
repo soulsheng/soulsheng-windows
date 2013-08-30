@@ -9,7 +9,7 @@ int WINAPI WinMain (_In_  HINSTANCE hInstance,
    { FILE *fp;
     fp=fopen("file.txt", "r");
 	if(fp!=NULL){
-    fread(line,sizeof(char),12,fp);
+    fread(line,sizeof(char),20,fp);
 	MessageBox(0,line,"windows´°¿Ú",0);
 	}
 		return 0;
